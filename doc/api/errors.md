@@ -18,21 +18,13 @@
 
 <!--type=class-->
 
-A general error object. Unlike other error objects, `Error` instances do not
-denote any specific circumstance of why the error occurred. Errors capture a
-"stack trace" detailing the point in the program at which they were
-instantiated, and may provide a description of the error.
+表示通用错误对象，与其他错误对象不同，`Error` 类型的实例并不表征该错误生成的具体环境。相反地，错误在生成时会捕捉一个「错误堆栈」（stack trace）详细地记录程序执行到生成错误的位点，也可能提供这个错误的介绍。
 
-**Note**: io.js will generate this class of error to encapsulate system
-errors as well as plain JavaScript errors.
+**注意**： 无论是对于 system 错误或 JavaScript 错误，io.js 都会从此基本类型派生错误实例。
 
 #### new Error(message)
 
-Instantiates a new Error object and sets its `.message` property to the provided
-message. Its `.stack` will represent the point in the program at which `new Error`
-was called. Stack traces are subject to [V8's stack trace API](https://code.google.com/p/v8-wiki/wiki/JavaScriptStackTraceApi).
-Stack traces only extend to the beginning of synchronous code execution, *or* a number of frames given by
-`Error.stackTraceLimit`, whichever is smaller.
+初始化一个新的错误对象，并且用给定的错误描述，设置这个对象的 `.message` 属性。这个错误实例的 `.stack` 属性将会标识出它在程序中，通过 `new Error` 语句初始化的位点。错误堆栈遵循 [V8 的 stack trace API](https://code.google.com/p/v8-wiki/wiki/JavaScriptStackTraceApi) 文档规范生成。一个错误堆栈只能延伸到程序代码同步执行的开始位置，*或* 通过设置 `Error.stackTraceLimit` 的数量决定追溯的最顶层数，当然，后者的追溯层数只能比前者更少。
 
 #### error.message
 
