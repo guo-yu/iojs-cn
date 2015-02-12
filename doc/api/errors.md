@@ -2,25 +2,17 @@
 
 <!--type=misc-->
 
-由 io.js 生成的错误共有两类：JavaScript 错误与系统（system）错误。所有错误或是 JavaScript 的原生错误 [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) 类型的实例，或继承于此类型，这些错误都确定至少具有 Error 类型的属性。
+由 io.js 生成的错误共有两类：JavaScript 错误与系统（system）错误。所有错误或是 JavaScript 的原生错误 [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) 类型的实例，或继承于此类型，这些错误都确定**至少具有** Error 类型的属性。
 
-When an operation is not permitted due to language-syntax or
-language-runtime-level reasons, a **JavaScript error** is generated and thrown
-as an **exception**. If an operation is not allowed due to system-level
-restrictions, a **system error** is generated. Client code is then given the
-opportunity to **intercept** this error based on how the API **propagates** it.
+当某个操作由于语法错误或者语言运行时错误不被允许执行时，一个 **JavaScript 错误** 被生成，作为 **exception** 抛出。当某个操作由于系统级别的原因不被允许执行时，一个 **system 错误** 被生成，取决于具体 API 如何**广播**错误，客户端代码能够自由选择是否对此错误进行截断。
 
-The style of API called determines how generated errors are handed back, or
-**propagated**, to client code, which in turn informs how the client may **intercept**
-the error. Exceptions can be intercepted using the `try / catch` construct;
-other propagation strategies are covered [below](#errors_error_propagation_and_interception).
+调用 API 的方法决定了如何传递之后生成的错误，比如**广播**错误给客户端代码，也进而通知客户端代码如何**截取**错误。通常来说，我们可以使用 `try / catch` 语句截取异常，其他错误传递的策略会在[以下文档](#errors_error_propagation_and_interception)中被提到。
 
 ## JavaScript Errors
 
 <!--type=misc-->
 
-JavaScript errors typically denote that an API is being used incorrectly, or that
-there is a problem with the program as written.
+通常，JavaScript errors 表示一个 API 正被不正确地使用，或者正在执行的程序本身有内部错误。
 
 ### Class: Error
 
