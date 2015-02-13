@@ -28,14 +28,11 @@
 
 #### error.message
 
-A string of the value passed to `Error()` upon instantiation. The message will
-also appear in the first line of the stack trace of the error. Changing this
-property *may not* change the first line of the stack trace.
+在初始化 `Error()` 类型实例时传递的错误描述字符串，这段描述也同时会出现在错误堆栈的第一行，不过，改变这个属性 *并不一定会* 改变错误堆栈打印出的第一行。
 
 #### error.stack
 
-A property that, when **accessed**, returns a string representing the point in the program
-at which this error was instantiated. An example stacktrace follows:
+当**访问** `error.stack` 属性时，会返回当前程序运行时出现此错误的描述。以下是一个错误堆栈（stacktrace）的例子：
 
     Error: Things keep happening!
        at /home/gbusey/file.js:525:2
@@ -43,14 +40,7 @@ at which this error was instantiated. An example stacktrace follows:
        at Actor.<anonymous> (/home/gbusey/actors.js:400:8)
        at increaseSynergy (/home/gbusey/actors.js:701:6)
 
-The first line is formatted as `<error class name>: <error message>`, and it is followed
-by a series of stack frames (each line beginning with "at "). Each frame describes
-a call site in the program that lead to the error being generated. V8 attempts to
-display a name for each function (by variable name, function name, or object
-method name), but occasionally it will not be able to find a suitable name. If
-V8 cannot determine a name for the function, only location information will be
-displayed for that frame. Otherwise, the determined function name will be displayed
-with location information appended in parentheses.
+错误堆栈的第一行被格式化为 `<error class name>: <error message>` 在此之后的是一系列的错误层级（每一行由 "at " 单词开始）每一个错误层级描述了在此层级触发错误的调用语句。V8 引擎会尝试给每个函数展示一个有效的名字（由变量名，函数名，或者对象方法名称组成），不过偶尔会出现一个不太合适的名字。如果 v8 无法找到这个函数的名称，将会只有函数调用的位置信息展示出来，否则，会以函数名附加上错误位置信息的形式展示出来。
 
 Frames are **only** generated for JavaScript functions. If, for example, execution
 synchronously passes through a C++ addon function called `cheetahify`, which itself
