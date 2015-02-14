@@ -42,10 +42,7 @@
 
 错误堆栈的第一行被格式化为 `<error class name>: <error message>` 在此之后的是一系列的错误层级（每一行由 "at " 单词开始）每一个错误层级描述了在此层级触发错误的调用语句。V8 引擎会尝试给每个函数展示一个有效的名字（由变量名，函数名，或者对象方法名称组成），不过偶尔会出现一个不太合适的名字。如果 v8 无法找到这个函数的名称，将会只有函数调用的位置信息展示出来，否则，会以函数名附加上错误位置信息的形式展示出来。
 
-Frames are **only** generated for JavaScript functions. If, for example, execution
-synchronously passes through a C++ addon function called `cheetahify`, which itself
-calls a JavaScript function, the frame representing the `cheetahify` call will **not**
-be present in stacktraces:
+错误堆栈**只会** JavaScript 函数层面触发，比如在下边这个例子中：程序顺序执行经过一个 C++ addon 函数 `cheetahify`，此函数中内部调用了一个 JavaScript 函数，所以错误堆栈中将 **不会** 显示出此 C++ 函数的名称。
 
 ```javascript
 var cheetahify = require('./native-binding.node');
@@ -74,21 +71,17 @@ makeFaster(); // will throw:
 //     at node.js:906:3
 ```
 
-The location information will be one of:
+错误堆栈中显示的位置信息会是以下三种之一：
 
-* `native`, if the frame represents a call internal to V8 (as in `[].forEach`).
-* `plain-filename.js:line:column`, if the frame represents a call internal to io.js.
-* `/absolute/path/to/file.js:line:column`, if the frame represents a call in a user program, or its dependencies.
+* `native`, 原生错误。如果此堆栈表示错误出现在 v8 内部逻辑（比如 `[].forEach`）
+* `plain-filename.js:line:column`, 如果此错误堆栈表示触发在 io.js 的内部调用中。
+* `/absolute/path/to/file.js:line:column`, 当错误触发在用户编写的程序或者其依赖模块中时。
 
-It is important to note that the string representing the stacktrace is only
-generated on **access**: it is lazily generated.
+值得注意的一点是，只有当错误**被访问**时错误堆栈的描述才会生成，换句话说，这些错误描述并非预先生成。
 
-The number of frames captured by the stack trace is bounded by the smaller of
-`Error.stackTraceLimit` or the number of available frames on the current event
-loop tick.
+错误堆栈的数量受限于 `Error.stackTraceLimit` 的最大数目，或者当前事件循环中的最大框架层级。
 
-System-level errors are generated as augmented Error instances, which are detailed
-[below](#errors_system_errors).
+系统级别的错误以 augmented Error 的实例存在。以下文档将[详述](#errors_system_errors)
 
 #### Error.captureStackTrace(targetObject[, constructorOpt])
 
