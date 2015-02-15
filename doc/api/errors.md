@@ -85,9 +85,7 @@ makeFaster(); // will throw:
 
 #### Error.captureStackTrace(targetObject[, constructorOpt])
 
-Creates a `.stack` property on `targetObject`, which when accessed returns
-a string representing the location in the program at which `Error.captureStackTrace`
-was called.
+在目标对象 `targetObject` 上创建 `.stack` 属性，当访问这个属性时，返回程序执行中调用 `Error.captureStackTrace` 的位置。
 
 ```javascript
 var myObject = {};
