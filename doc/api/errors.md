@@ -95,16 +95,12 @@ Error.captureStackTrace(myObject);
 myObject.stack  // similar to `new Error().stack`
 ```
 
-The first line of the trace, instead of being prefixed with `ErrorType:
-message`, will be the result of `targetObject.toString()`.
+不过，与直接使用 `new Error().stack` 不同的是，错误堆栈的第一行并非格式化为 `ErrorType:
+message` 而是 `targetObject.toString()`. (?)
 
-`constructorOpt` optionally accepts a function. If given, all frames above
-`constructorOpt`, including `constructorOpt`, will be omitted from the generated
-stack trace.
+此函数的第二个可选参数 `constructorOpt` 接受一个函数。如果传入，错误堆栈中的所有在 `constructorOpt` 之上（包含 `constructorOpt`）都将被忽略。
 
-This is useful for hiding implementation details of error generation from the
-end user. A common way of using this parameter is to pass the current Error
-constructor to it:
+这个接口在针对最终的模块使用者，隐藏错误具体实现描述的时候很有用处。一个通常的做法是将当前自定义 Error 的构造函数传给它：
 
 ```javascript
 
