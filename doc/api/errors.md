@@ -123,16 +123,13 @@ new MyError().stack
 
 ### Class: RangeError
 
-A subclass of Error that indicates that a provided argument was not within the
-set or range of acceptable values for a function; whether that be a numeric
-range, or outside the set of options for a given function parameter. An example:
+RangeError 是 Error 类的一个子类，用以表示调用时提供的参数不在函数预设值范围之内的错误，无论是预设的是数字范围，还是一系列缺省配置参数，都可以用这个错误来标识，例子如下：
 
 ```javascript
 require('net').connect(-1);  // throws RangeError, port should be > 0 && < 65536
 ```
 
-io.js will generate and throw RangeError instances *immediately* -- they are a form
-of argument validation.
+io.js 此时会**立即**生成并抛出一个 RangeError 实例，这其实是一定意义上的参数校验。
 
 ### Class: TypeError
 
