@@ -143,17 +143,12 @@ io.js 将会生成比**立即**抛出一个 TypeError 的实例，这也是一�
 
 ### Class: ReferenceError
 
-A subclass of Error that indicates that an attempt is being made to access a variable
-that is not defined. Most commonly it indicates a typo, or an otherwise broken program.
-While client code may generate and propagate these errors, in practice only V8 will do
-so.
+ReferenceError 是 Error 类的子类，用以表示访问的变量未定义的错误。一般来说这种错误产生的原因是变量名称写错的笔误，或者程序写错。虽然客户端代码可以触发并抛出此类错误，但实际上只有 v8 会抛出此类错误。
 
 ```javascript
 doesNotExist; // throws ReferenceError, doesNotExist is not a variable in this program.
 ```
-
-ReferenceError instances will have an `.arguments` member that is an array containing
-one element -- a string representing the variable that was not defined.
+ReferenceError 错误的实例均会有一个 `.arguments` 属性，此属性是一个数组，并包括一个字符串元素，表示了该未定义的变量名称:
 
 ```javascript
 try {
@@ -163,9 +158,7 @@ try {
 }
 ```
 
-Unless the userland program is dynamically generating and running code,
-ReferenceErrors should always be considered a bug in the program, or its
-dependencies.
+除非客户端代码是动态生成并运行，否则 ReferenceErrors 都应该被视为这段代码或其依赖的模块存在 bug
 
 ### Class: SyntaxError
 
