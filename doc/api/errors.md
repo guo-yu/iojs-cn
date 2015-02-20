@@ -133,16 +133,13 @@ io.js 此时会**立即**生成并抛出一个 RangeError 实例，这其实是�
 
 ### Class: TypeError
 
-A subclass of Error that indicates that a provided argument is not an allowable
-type. For example, passing a function to a parameter which expects a string would
-be considered a TypeError.
+TypeError 是 Error 类的子类，用以表示此函数提供的参数不是给定的类型。比如，给一个指定传参类型为字符串的函数传递一个 function 会被认为是 TypeError:
 
 ```javascript
 require('url').parse(function() { }); // throws TypeError, since it expected a string
 ```
 
-io.js will generate and throw TypeError instances *immediately* -- they are a form
-of argument validation.
+io.js 将会生成比**立即**抛出一个 TypeError 的实例，这也是一定意义上的参数校验。
 
 ### Class: ReferenceError
 
